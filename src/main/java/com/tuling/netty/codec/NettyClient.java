@@ -22,8 +22,6 @@ public class NettyClient {
                             ChannelPipeline pipeline = ch.pipeline();
                             //pipeline.addLast(new StringEncoder());
                             //pipeline.addLast(new ObjectEncoder());
-                            pipeline.addLast(new LongToByteEncoder());
-                            pipeline.addLast(new ByteToLongDecoder());
                             pipeline.addLast(new NettyClientHandler());
                         }
                     });

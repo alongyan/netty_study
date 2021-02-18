@@ -10,6 +10,9 @@ import java.nio.channels.CompletionHandler;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * 线程池版本
+ */
 public class ServerMultiThread {
     public static void main(String[] args) throws Exception {
 

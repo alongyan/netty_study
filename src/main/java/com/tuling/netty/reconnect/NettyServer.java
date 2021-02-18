@@ -1,4 +1,4 @@
-package com.tuling.netty.base;
+package com.tuling.netty.reconnect;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;

@@ -5,7 +5,7 @@ import java.net.Socket;
 
 public class SocketClient {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         Socket socket = new Socket("127.0.0.1", 9000);
         //向服务端发送数据
         socket.getOutputStream().write("HelloServer".getBytes());

@@ -1,5 +1,6 @@
 package com.tuling.netty.codec;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -9,9 +10,11 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         //System.out.println("从客户端读取到String：" + msg.toString());
         //System.out.println("从客户端读取到Object：" + ((User)msg).toString());
-        System.out.println("从客户端读取到Long：" + (Long)msg);
-        //给客户端发回一个long数据
-        ctx.writeAndFlush(2000L);
+         //测试用protostuff对对象编解码
+        ByteBuf buf = (ByteBuf) msg;
+        byte[] bytes = new byte[buf.readableBytes()];
+        buf.readBytes(bytes);
+        System.out.println("从客户端读取到Object：" + ProtostuffUtil.deserializer(bytes, User.class));
     }
 
     @Override

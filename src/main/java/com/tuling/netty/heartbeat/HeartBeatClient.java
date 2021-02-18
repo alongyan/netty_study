@@ -31,8 +31,8 @@ public class HeartBeatClient {
             String text = "Heartbeat Packet";
             Random random = new Random();
             while (channel.isActive()) {
-                int num = random.nextInt(10);
-                Thread.sleep(2 * 1000);
+                int num = random.nextInt(8);
+                Thread.sleep(num * 1000);
                 channel.writeAndFlush(text);
             }
         } catch (Exception e) {

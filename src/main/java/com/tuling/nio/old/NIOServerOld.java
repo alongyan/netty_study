@@ -1,4 +1,4 @@
-package com.tuling.nio;
+package com.tuling.nio.old;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -9,7 +9,7 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
-public class NIOServer {
+public class NIOServerOld {
 
     //public static ExecutorService pool = Executors.newFixedThreadPool(10);
 

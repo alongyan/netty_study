@@ -16,13 +16,14 @@ public class DirectMemoryTest {
                 buffer.putInt(j);
             }
             buffer.flip();
+
             for (int j = 0; j < 200; j++) {
                 buffer.getInt();
             }
             buffer.clear();
         }
         long endTime = System.currentTimeMillis();
-        System.out.println("堆内存访问:" + (endTime - startTime));
+        System.out.println("堆内存访问:" + (endTime - startTime) + "ms");
     }
 
     public static void directAccess() {
@@ -40,7 +41,7 @@ public class DirectMemoryTest {
             buffer.clear();
         }
         long endTime = System.currentTimeMillis();
-        System.out.println("直接内存访问:" + (endTime - startTime));
+        System.out.println("直接内存访问:" + (endTime - startTime) + "ms");
     }
 
     public static void heapAllocate() {
@@ -49,7 +50,7 @@ public class DirectMemoryTest {
             ByteBuffer.allocate(100);
         }
         long endTime = System.currentTimeMillis();
-        System.out.println("堆内存申请:" + (endTime - startTime));
+        System.out.println("堆内存申请:" + (endTime - startTime) + "ms");
     }
 
     public static void directAllocate() {
@@ -58,7 +59,7 @@ public class DirectMemoryTest {
             ByteBuffer.allocateDirect(100);
         }
         long endTime = System.currentTimeMillis();
-        System.out.println("直接内存申请:" + (endTime - startTime));
+        System.out.println("直接内存申请:" + (endTime - startTime) + "ms");
     }
 
     public static void main(String args[]) {

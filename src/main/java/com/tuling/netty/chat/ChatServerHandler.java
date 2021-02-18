@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 
 public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
 
-    //GlobalEventExecutor.INSTANCE是全局的事件执行器，是一个单例
+    //GlobalEventExecutor.INSTANCE 是全局的事件执行器，是一个单例
     private static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -46,7 +46,7 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
         //这时我们遍历 channelGroup, 根据不同的情况， 回送不同的消息
         channelGroup.forEach(ch -> {
             if (channel != ch) { //不是当前的 channel,转发消息
-                ch.writeAndFlush("[ 客户端 ]" + channel.remoteAddress() + " 发送了消息：" + msg + "\n");
+                ch.writeAndFlush("[ 客户端 ]" + channel.remoteAddress() + " 发送了消息：" + msg + "\n" + "_");
             } else {//回显自己发送的消息给自己
                 ch.writeAndFlush("[ 自己 ]发送了消息：" + msg + "\n");
             }

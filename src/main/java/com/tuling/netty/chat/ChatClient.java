@@ -1,10 +1,12 @@
 package com.tuling.netty.chat;
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
@@ -21,9 +23,12 @@ public class ChatClient {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
                             ChannelPipeline pipeline = ch.pipeline();
-                            pipeline.addLast(new StringEncoder());
-                            pipeline.addLast(new StringDecoder());
-
+                            pipeline.addLast(new DelimiterBasedFrameDecoder(1024, Unpooled.copiedBuffer("_".getBytes())));
+                            //向pipeline加入解码器
+                            pipeline.addLast("decoder", new StringDecoder());
+                            //向pipeline加入编码器
+                            pipeline.addLast("encoder", new StringEncoder());
+                            //加入自己的业务处理handler
                             pipeline.addLast(new ChatClientHandler());
                         }
                     });
@@ -39,7 +44,7 @@ public class ChatClient {
                 channel.writeAndFlush(msg);
             }*/
             for (int i = 0; i < 200; i++) {
-                channel.writeAndFlush("hello，诸葛!");
+                channel.writeAndFlush("hello，诸葛!" + "_");
             }
         } finally {
             group.shutdownGracefully();

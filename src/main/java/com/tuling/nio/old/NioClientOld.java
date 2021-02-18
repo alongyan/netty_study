@@ -1,4 +1,4 @@
-package com.tuling.nio;
+package com.tuling.nio.old;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -8,7 +8,7 @@ import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
-public class NioClient {
+public class NioClientOld {
     //通道管理器
     private Selector selector;
 
@@ -18,9 +18,9 @@ public class NioClient {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        NioClient client = new NioClient();
+        NioClientOld client = new NioClientOld();
         client.initClient("127.0.0.1", 9000);
-        client.connect();
+        //client.connect();
     }
 
     /**
@@ -38,8 +38,7 @@ public class NioClient {
         // 获得一个通道管理器
         this.selector = Selector.open();
 
-        // 客户端连接服务器,其实方法执行并没有实现连接，需要在listen（）方法中调
-        //用channel.finishConnect() 才能完成连接
+        // 客户端连接服务器,需要在listen（）方法中调用channel.finishConnect() 才能完成连接
         channel.connect(new InetSocketAddress(ip, port));
         //将通道管理器和该通道绑定，并为该通道注册SelectionKey.OP_CONNECT事件。
         channel.register(selector, SelectionKey.OP_CONNECT);

@@ -1,5 +1,7 @@
 package com.tuling.netty.codec;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -16,8 +18,9 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
         //ctx.writeAndFlush("测试String编解码");
         //测试对象编解码
         //ctx.writeAndFlush(new User(1,"zhuge"));
-        //测试自定义Long数据编解码器
-        ctx.writeAndFlush(1000L);
+        //测试用protostuff对对象编解码
+        ByteBuf buf = Unpooled.copiedBuffer(ProtostuffUtil.serializer(new User(1, "zhuge")));
+        ctx.writeAndFlush(buf);
 
     }
 }
